@@ -15,15 +15,25 @@ function App() {
   const [cards, setCards] = useState([]);
   const [isPushPromptEligible, setIsPushPromptEligible] = useState(true);
 
+  const requestPushPermission = () => {
+    braze.requestPushPermission();
+    setIsPushPromptEligible(false);
+  }
+
   useEffect(() => {
     braze.changeUser("aaiduntestagain");
+
+    if (braze.isPushPermissionGranted() === false && braze.isPushBlocked() === false){
+      setIsPushPromptEligible(true);
+    }
+
   }, []);
 
   return (
     <Router>
       <Navbar />
       <PushPermissionContainer>
-        <PushPermissionButton disabled={!isPushPromptEligible}>Request Push Permission</PushPermissionButton>
+        <PushPermissionButton onClick={requestPushPermission} disabled={!isPushPromptEligible}>Request Push Permission</PushPermissionButton>
       </PushPermissionContainer>
       <Routes>
         <Route path='/' element={<User />} />
