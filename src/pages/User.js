@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import TitledInputBox from '../components/TitledInputBox';
 import KeyValueInputBox from '../components/KeyValueInputBox';
+import * as braze from "@braze/web-sdk";
 
 function User() {
     const [firstName, setFirstName] = useState('')
@@ -31,7 +32,19 @@ function User() {
     const [purchasePropertyValue, setPurchasePropertyValue] = useState('')
 
     const setStandardAttributes = () => {
+        if (setFirstName) {
+            braze.getUser().setFirstName(firstName)
+        }
 
+        if (setLastName){
+            braze.getUser().setLastName(lastName)  
+        }
+
+        if (dateOfBirth) {
+            let splitDateOfBirth = dateOfBirth.split('/')
+            braze.getUser().setDateOfBirth(parseInt(splitDateOfBirth[2]), 
+                parseInt(splitDateOfBirth[0]), parseInt(splitDateOfBirth[1]))
+        }
     }
 
     const setCustomAttribute = () => {

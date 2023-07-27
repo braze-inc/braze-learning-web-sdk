@@ -16,7 +16,7 @@ function App() {
   const [isPushPromptEligible, setIsPushPromptEligible] = useState(true);
 
   useEffect(() => {
-
+    braze.changeUser("aaiduntestagain");
   }, []);
 
   return (
