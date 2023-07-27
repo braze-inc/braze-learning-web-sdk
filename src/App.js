@@ -27,6 +27,26 @@ function App() {
       setIsPushPromptEligible(true);
     }
 
+    braze.subscribeToInAppMessage(function (inAppMessage) {
+      if (inAppMessage instanceof braze.InAppMessage) {
+        if (inAppMessage.isControl) {
+          braze.logInAppMessageImpression(inAppMessage);
+        }
+        else {
+          const extras = inAppMessage.extras;
+          if (extras) {
+            for (const key in extras) {
+              if (key === 'display' && extras[key] === 'homepage') {
+                braze.showInAppMessage(inAppMessage);
+              }
+            }
+          }
+        }
+      }
+    });
+   
+    braze.openSession();
+
   }, []);
 
   return (
