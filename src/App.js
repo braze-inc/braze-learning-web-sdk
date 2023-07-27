@@ -15,6 +15,11 @@ function App() {
   const [cards, setCards] = useState([]);
   const [isPushPromptEligible, setIsPushPromptEligible] = useState(true);
 
+  braze.subscribeToContentCardsUpdates(function (event) {
+    setCards(event.cards);
+  });
+  braze.requestContentCardsRefresh();
+
   const requestPushPermission = () => {
     braze.requestPushPermission();
     setIsPushPromptEligible(false);
@@ -47,7 +52,7 @@ function App() {
    
     braze.openSession();
 
-  }, []);
+  }, [setCards]);
 
   return (
     <Router>

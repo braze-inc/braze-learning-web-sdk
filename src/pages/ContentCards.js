@@ -15,6 +15,9 @@ function ContentCards({ cards }) {
             <Feed>
                 <div>Custom Feed</div>
                 <Cards>
+                    {cards.filter(card => card.extras['feed'] === 'custom').map(card =>
+                        <CustomContentCard key={card.id} imageUrl={card.imageUrl} title={card.title} description={card.description} />
+                    )}
                 </Cards>
             </Feed>
             <Feed>
