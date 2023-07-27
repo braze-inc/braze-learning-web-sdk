@@ -1,1 +1,1 @@
-# Braze Web Developer Learning Path — Step 3
+# Braze Web Developer Learning Path — Step 4

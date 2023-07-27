@@ -58,7 +58,22 @@ function User() {
     const setPurchaseEvent = () => {
 
     }
-
+    
+    const handleRegisterPushClick = async () => {
+        const {
+          requestPushPermission,
+          logCustomEvent,
+          requestImmediateDataFlush
+        } = await import(
+          "@braze/web-sdk"
+        );
+        requestPushPermission(() => {
+          logCustomEvent("send me push");
+          requestImmediateDataFlush();
+        }, error => {
+           console.warn(`Failed to request push permission`, error)
+        });
+      };
 
     return (
         <UserContainer>
@@ -76,6 +91,7 @@ function User() {
                 <TitledInputBox title={'Push Sub'} value={pushNotificationSubscriptionType} setValue={setPushNotificationSubscriptionType} />
                 <TitledInputBox title={'Email Sub'} value={emailNotificationSubscriptionType} setValue={setEmailNotificationSubscriptionType} />
                 <Button onClick={setStandardAttributes}>Submit</Button>
+                <Button onClick={handleRegisterPushClick}>Push</Button>
                 <Title>Custom Attributes</Title>
                 <KeyValueInputBox k={customAttributeKey} setKey={setCustomAttributeKey} value={customAttributeValue} setValue={setCustomAttributeValue} />
                 <Button onClick={setCustomAttribute}>Submit</Button>
