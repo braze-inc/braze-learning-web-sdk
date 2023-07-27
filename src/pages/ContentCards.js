@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import CustomContentCard from '../components/CustomContentCard';
-import * as braze from "@braze/web-sdk"
+import * as braze from "@braze/web-sdk";
 
 
 function ContentCards({ cards }) {
 
     useEffect(() => {
-        braze.showContentCards(document.getElementByID('standard-feed'));
+        braze.showContentCards(document.getElementById('standard-feed'));
     }, [])
 
     return (
