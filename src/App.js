@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import User from './pages/User';
 import ContentCards from './pages/ContentCards';
+import * as braze from "@braze/web-sdk
 
 braze.initialize('replace_with_key', {
   baseUrl: "replace_with_endpoint", 
